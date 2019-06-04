@@ -1,0 +1,127 @@
+//
+//  PrefixHeader.pch
+//  PokerRelay
+//
+//  Created by zcx on 2018/6/4.
+//  Copyright © 2018年 szFacebook. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define ACCROSSDOMAIN   //是否支持跨域
+//#define CANLANDSCAPE   //注释竖屏，不注释横屏
+
+//游戏地址
+#define APPGameUrl @"https://bubblebox.com/html5/embed/blurracing/"
+
+
+#define ColorFromSixteen(s,al)  ([UIColor colorWithRed:(((s & 0xFF0000) >> 16))/255.0 green:(((s &0xFF00) >>8))/255.0 blue:((s &0xFF))/255.0 alpha:al])
+// 16进制颜色
+#define UIColorFromHex(s) [UIColor colorWithRed:(((s & 0xFF0000) >> 16))/255.0 green:(((s &0xFF00) >>8))/255.0 blue:((s &0xFF))/255.0 alpha:1.0]
+
+#define MainScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define MainScreenHeight ([UIScreen mainScreen].bounds.size.height)
+
+#define iPhoneX (CGSizeEqualToSize([UIScreen mainScreen].bounds.size,CGSizeMake(375, 812)) || CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)))
+
+#define IOS11 (([[UIDevice currentDevice].systemVersion doubleValue] >=11.0)?YES:NO)
+#define IOS10 (([[UIDevice currentDevice].systemVersion doubleValue] >=10.0)?YES:NO)
+#define IOS9  (([[UIDevice currentDevice].systemVersion doubleValue] >=9.0)?YES:NO)
+#define IOS8  (([[UIDevice currentDevice].systemVersion doubleValue] >=8.0)?YES:NO)
+#define IOS7  (([[UIDevice currentDevice].systemVersion doubleValue] >=7.0)?YES:NO)
+
+// 判断设备是不是iPad.
+#define DEVICE_IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
+// 判断设备是不是iPhone.
+#define DEVICE_IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+
+// 判断设备是不是iPhoneX.
+#define iPhoneX (CGSizeEqualToSize([UIScreen mainScreen].bounds.size,CGSizeMake(375, 812)) || CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)))
+
+// 获取本地应用完整版本号
+#define APP_SHORT_VERSION [[NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Info.plist"]] objectForKey:@"CFBundleShortVersionString"]
+
+// 判断系统版本是否低于 v
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+// 判断系统版本是否高于 v
+#define SYSTEM_VERSION_MORE_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+
+/**********************************坐标尺寸类******************************************/
+#define SCREEN_WIDTH                 ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT                ([[UIScreen mainScreen] bounds].size.height)
+
+#define TabBarHeight        ((iPhoneX)?83:49)
+#define NaviBarHeight       ((iPhoneX)?88:64)
+#define StatusBarHeight     ((iPhoneX)?44:20)
+#define NaviBarABXHeight    (NaviBarHeight - StatusBarHeight)
+
+#define BottomInset         (TabBarHeight - 49)
+
+#define X(v)                    (v).frame.origin.x
+#define Y(v)                    (v).frame.origin.y
+#define WIDTH(v)                (v).frame.size.width
+#define HEIGHT(v)               (v).frame.size.height
+
+#define MinX(v)                 CGRectGetMinX((v).frame)
+#define MinY(v)                 CGRectGetMinY((v).frame)
+
+#define MidX(v)                 CGRectGetMidX((v).frame)
+#define MidY(v)                 CGRectGetMidY((v).frame)
+
+#define MaxX(v)                 CGRectGetMaxX((v).frame)
+#define MaxY(v)                 CGRectGetMaxY((v).frame)
+
+#define NAVIGATETION_BAR_MAX_Y (SCREEN_HEIGHT == 812.0 || SCREEN_WIDTH == 812.0?88:64)
+#define SAFE_AREA_BOTTOM_HEIGHT (SCREEN_HEIGHT == 812.0 || SCREEN_WIDTH == 812.0?34:0)
+#define SENDERGROOVE_HEIGHT (SCREEN_HEIGHT == 812.0 || SCREEN_WIDTH == 812.0?30:0)
+#define SENDERGROOVE_MARGIN (SCREEN_HEIGHT == 812.0 || SCREEN_WIDTH == 812.0?14:0)
+#define STATUS_BAR_HEIGHT ((iPhoneX)?44:20)
+
+#define iPhoneXSafeArea     24
+
+#define BGNaviBarHeight     44
+#define NaviBarItemHeight   49
+
+#import "NSString+Extention.h"
+#import "NSObject+Extension.h"
+#import "UILabel+Create.h"
+#import "UIDevice+IdentifierAddition.h"
+#import "UIColor+XYThemeManager.h"
+#import "FB_GlobalUtlis.h"
+#import "FB_ConfigurationUtil.h"
+#import "FB_InterfacedConst.h"
+
+#import "YYKit.h"
+#import <SDWebImageManager.h>
+#import <SVProgressHUD.h>
+#import <AFNetworking.h>
+#import <AVOSCloud/AVOSCloud.h>
+
+#define IsPortrait   [NSObject FB_M_isOrientationPortrait]
+
+// 判断数据是否为空. NSString NSDictionary NSArray NSNumber.
+// 注意，这里分别检查数据类型是否匹配+指针是否为空+内容是否为空.
+#define FB_IS_STR_NIL(objStr) (![objStr isKindOfClass:[NSString class]] || objStr == nil || [objStr length] <= 0 || [objStr isKindOfClass:[NSNull class]])
+
+#define FB_IS_DICT_NIL(objDict) (![objDict isKindOfClass:[NSDictionary class]] || objDict == nil || [objDict count] <= 0 || [objDict isKindOfClass:[NSNull class]])
+
+#define FB_IS_ARRAY_NIL(objArray) (![objArray isKindOfClass:[NSArray class]] || objArray == nil || [objArray count] <= 0 || [objArray isKindOfClass:[NSNull class]])
+
+#define FB_IS_ARRAY_NOT_NIL(objArray) (!FB_IS_ARRAY_NIL(objArray))
+
+#define FB_IS_STR_NOT_NIL(str) (!FB_IS_STR_NIL(str))
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#define BOTTOM_BAR_OBJECTID @"5b349c7ce37d040039ba5e85"
+
+#define FB_WEAKSELF(weakSelf) __weak __typeof(&*self)  weakSelf  = self
+#define WEAKSELF typeof(self) __weak weakSelf = self;
+#define STRONGSELF typeof(weakSelf) __strong strongSelf = weakSelf;
+
+#endif /* PrefixHeader_pch */
